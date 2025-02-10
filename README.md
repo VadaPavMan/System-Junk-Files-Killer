@@ -1,5 +1,7 @@
 ### **Project Name**: System Junk Files Remover  
 
+---
+
 ### **Description**  
 This project is a terminal-based utility for Windows that helps users quickly and efficiently delete temporary files (`Temp` and `%Temp%` folders) to improve system performance. By clearing unnecessary files from these locations, the program helps free up disk space and enhances the overall speed and responsiveness of the system. It also provides options for additional operations such as log tracking for bug resolution.
 
@@ -27,7 +29,7 @@ The program is designed to minimize user effort by automating the deletion proce
 2. **Build the Project**:
    - Open a terminal and compile the code:
      ```bash
-     g++ -std=c++17 -o JunkRemover main.cpp File Code/file.cpp
+     g++ -std=c++17 -o JunkRemover src.cpp File Code/file.cpp
      ```
 
 3. **Run the Program**:
@@ -63,15 +65,6 @@ The program is designed to minimize user effort by automating the deletion proce
 
 ---
 
-### **Credits**  
-- **Creator**: [@VadaPavMan](https://github.com/VadaPavMan)  
-- ASCII art and menu design by VadaPavMan.  
-
----
-
 ### **License**  
 This project is open-source and available under the MIT License. Feel free to contribute or modify it as per your needs.
 
----
-
-Let me know if this works or if you'd like more updates! 😊
