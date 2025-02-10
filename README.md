@@ -2,7 +2,7 @@
 
 ---
 
-[png](JunkRemover/preview.png)
+![png](JunkRemover/preview.png)
 
 ### **Description**  
 This project is a terminal-based utility for Windows that helps users quickly and efficiently delete temporary files (`Temp` and `%Temp%` folders) to improve system performance. By clearing unnecessary files from these locations, the program helps free up disk space and enhances the overall speed and responsiveness of the system. It also provides options for additional operations such as log tracking for bug resolution.
