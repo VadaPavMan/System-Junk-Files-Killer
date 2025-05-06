@@ -7,7 +7,7 @@
 
 ### **Description**  
 
-**If The Some Folder Are Not Present In Your Device, It Will Throw A Folder Not Found Error. No Need To Worry, Other Junk Files Which Present Will Be Deleted For Improving System Performance And Stablity.**
+**If Some Folder Are Not Present In Your Device, It Will Throw A Folder Not Found Error. No Need To Worry, Other Junk Files Which Are Present, Will Be Deleted For Improving System Performance And Stablity.**
 
 This project is a terminal-based utility for Windows that helps users quickly and efficiently delete temporary files (`Temp` and `%Temp%` folders) to improve system performance. By clearing unnecessary files from these locations, the program helps free up disk space and enhances the overall speed and responsiveness of the system. It also provides options for additional operations such as log tracking for bug resolution.
 
