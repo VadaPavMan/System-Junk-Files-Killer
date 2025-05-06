@@ -38,7 +38,8 @@ void file_deletion(const string &filePath)
                             " - " + e.what());
                     }
                 }
-                log("\033[32m\033[1m\nFile Deletion Completed. Some Files Might Not Have Been Deleted If They Were In Use.\033[0m");
+                log("\033[32m\033[1m\nFile Deletion Completed.\033[0m");
+                log("\033[32m\033[1m\nSome Files Might Not Have Been Deleted If They Were In Use.\033[0m");
             }
             catch (const exception &e)
             {
