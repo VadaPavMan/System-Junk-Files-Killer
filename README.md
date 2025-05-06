@@ -32,7 +32,7 @@ The program is designed to minimize user effort by automating the deletion proce
 2. **Build the Project**:
    - Open a terminal and compile the code:
      ```bash
-     g++ -std=c++17 -o JunkRemover src.cpp File Code/file.cpp
+     g++ -std=c++17 -o JunkRemover src.cpp file.cpp
      ```
 
 3. **Run the Program**:
