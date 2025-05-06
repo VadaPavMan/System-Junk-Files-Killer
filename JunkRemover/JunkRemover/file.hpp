@@ -7,6 +7,6 @@
 #include <string>
 using namespace std;
 
-void file_deletion(const string& filePath);
+void file_deletion(const string& filePath, char ver);
 
 #endif

@@ -53,15 +53,63 @@ int main()
 
   if (numb == 1)
   {
-    cout<<"\033Starting Junk File Cleanup..\n\033[0m"<<endl;
-    if(fs::exists(tempPath))
+    char ver;
+    cout << "\033[1;33mStarting Junk File Cleanup..\n\033[0m" << endl;
+    cout << "Do You Want To Proceed [Y/N]: ";
+    cin >> ver;
+    if (fs::exists(tempPath))
     {
-      cout<<"\033Cleaning TEMP Directory: \n\033[0m"<<tempPath<<endl;
-      file_deletion(tempPath);
+      cout << "\033[1;33mCleaning TEMP Directory: \n\033[0m" << tempPath << endl;
+      file_deletion(tempPath, ver);
     }
     else
     {
-      cout<<"TEMP Directory Not Found. \033[38;5;202m\033[1mError\033[0m"<<endl;
+      cout << "TEMP Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
+    }
+    if (fs::exists(PrefetchPath))
+    {
+      cout << "\033[1;33mCleaning Prefetch Directory: \n\033[0m" << PrefetchPath << endl;
+      file_deletion(PrefetchPath, ver);
+    }
+    else
+    {
+      cout << "Prefetch Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
+    }
+    if (fs::exists(sys32temp))
+    {
+      cout << "\033[1;33mCleaning Temp Directory: \n\033[0m" << sys32temp << endl;
+      file_deletion(sys32temp, ver);
+    }
+    else
+    {
+      cout << "Temp Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
+    }
+    if (fs::exists(tempInternetFilesPath))
+    {
+      cout << "\033[1;33mCleaning TempInternet Directory: \n\033[0m" << tempInternetFilesPath << endl;
+      file_deletion(tempInternetFilesPath, ver);
+    }
+    else
+    {
+      cout << "TempInternet Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
+    }
+    if (fs::exists(inetCachePath))
+    {
+      cout << "\033[1;33mCleaning INetCache Directory: \n\033[0m" << inetCachePath << endl;
+      file_deletion(inetCachePath, ver);
+    }
+    else
+    {
+      cout << "INetCache Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
+    }
+    if (fs::exists(recentsPath))
+    {
+      cout << "\033[1;33mCleaning Recents Directory: \n\033[0m" << recentsPath << endl;
+      file_deletion(recentsPath, ver);
+    }
+    else
+    {
+      cout << "Recents Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
     }
   }
 

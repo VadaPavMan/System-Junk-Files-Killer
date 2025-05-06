@@ -8,19 +8,16 @@
 
 using namespace std;
 
-void log(const string &message, int delay_ms = 100)
+void log(const string &message, int delay_ms = 30)
 {
     cout << message << endl;
     this_thread::sleep_for(chrono::milliseconds(delay_ms));
 }
 
-void file_deletion(const string &filePath)
+void file_deletion(const string &filePath,char ver)
 {
-    char ver;
     if (filesystem::exists(filePath))
     {
-        log("Do You Want To Proceed [Y/N]: ");
-        cin >> ver;
         if (ver == 'y' || ver == 'Y')
         {
             try
@@ -54,7 +51,7 @@ void file_deletion(const string &filePath)
         else
         { 
             cout<<"Invalid Input. "<<endl;
-            file_deletion(filePath);
+            file_deletion(filePath, ver);
         }
     }
     else
