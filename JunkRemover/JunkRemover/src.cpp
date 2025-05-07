@@ -1,117 +1,154 @@
+#include <fstream>
 #include <iostream>
 #include <filesystem>
-#include <fstream>
-#include <cstdlib>
-#include "file.hpp"
+#include <windows.h>
+#include <chrono>
+#include <thread>
+#include <string>
+#include "src.hpp"
+
 using namespace std;
-namespace fs = std::filesystem;
 
-int main()
+void log(const string &message, int delay_ms = 30)
 {
-  // Variable Declarations
-  int numb;
-  const char *tempPathCStr = getenv("TEMP");
-  if (!tempPathCStr)
-  {
-    cerr << "Error: Unable to retrieve the TEMP directory." << endl;
-    return 1;
-  }
-  const string tempPath(tempPathCStr);
+    cout << message << endl;
+    this_thread::sleep_for(chrono::milliseconds(delay_ms));
+}
 
-  const char *systemrootCStr = getenv("SystemRoot");
-  if (!systemrootCStr)
-  {
-    cerr << "Error: Unable to retrieve the TEMP directory." << endl;
-    return 1;
-  }
-  const string PrefetchPath = string(systemrootCStr) + "\\Prefetch";
-  const string sys32temp = string(systemrootCStr) + "\\System32\\temp";
-  const string tempInternetFilesPath = string(systemrootCStr) + "\\Temporary Internet Files";
-  const string inetCachePath = string(systemrootCStr) + "\\INetCache";
-  const string recentsPath = string(systemrootCStr) + "\\Recent";
-  cout << R"(
-    
-      _             _     ____    _  ___ _ _           
-     | |_   _ _ __ | | __/ ___|  | |/ (_) | | ___ _ __       
-  _  | | | | | '_ \| |/ /\___ \  | ' /| | | |/ _ \ '__|
- | |_| | |_| | | | |   <  ___) | | . \| | | |  __/ |   
-  \___/ \__,_|_| |_|_|\_\|____/  |_|\_\_|_|_|\___|_|   
-                                                       
-                            
-)" << endl;
+void file_deletion(const string &filePath, int ver)
+{
+    if (filesystem::exists(filePath))
+    {
+        if (ver == 1)
+        {
+            try
+            {
+                for (const auto &entry : filesystem::directory_iterator(filePath))
+                {
+                    try
+                    {
+                        filesystem::remove_all(entry);
+                        log("Deleted: " + entry.path().string());
+                    }
+                    catch (const filesystem::filesystem_error &e)
+                    {
+                        log("Unable to delete: " + entry.path().string() +
+                            " - " + e.what());
+                    }
+                }
+                log("\033[32m\033[1m\nFile Deletion Completed.\033[0m");
+                log("\033[32m\033[1m\nSome Files Might Not Have Been Deleted If They Were In Use.\033[0m");
+            }
+            catch (const exception &e)
+            {
+                log("An unexpected error occurred: " + string(e.what()));
+            }
+        }
+        else if (ver == 0)
+        {
+            cout << "Operation Closed." << endl;
+            return;
+        }
+    }
+    else
+    {
+        log(filePath + " Path Does Not Exist. Retry With System Administrator.");
+    }
+}
 
-  cout << "\033[1;33mCreator:\033[0m \033[1m@VadaPavMan\033[0m\n\033[1;33mGithub Account:\033[0m \033[1mhttps://github.com/VadaPavMan\033[0m\n"
-       << endl;
-  cout << "\033[38;5;202m\033[1mChoose What Operation You Want To Perform: " << endl;
-  cout << "\033[38;5;81m\033[1m1. System Junk Files Remover." << endl;
-  cout << "2. Bug Log Tracking." << endl;
-  cout << "3. Android Bug Log Tracking." << endl;
-  cout << "4. Exit.\n\033[0m" << endl;
+bool CheckASDK()
+{
+    if (system("abd --version > null 2>&1") == 0)
+    {
+        return true;
+    }
+    return false;
+}
 
-  cout << "Enter The Number Of The Operation: ";
-  cin >> numb;
+void openURL(const std::string &url)
+{
+    ShellExecute(nullptr, "open", url.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+}
 
-  if (numb == 1)
-  {
-    char ver;
-    cout << "\033[1;33mStarting Junk File Cleanup..\n\033[0m" << endl;
-    cout << "Do You Want To Proceed [Y/N]: ";
-    cin >> ver;
-    if (fs::exists(tempPath))
-    {
-      cout << "\033[1;33mCleaning TEMP Directory: \n\033[0m" << tempPath << endl;
-      file_deletion(tempPath, ver);
-    }
-    else
-    {
-      cout << "TEMP Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-    if (fs::exists(PrefetchPath))
-    {
-      cout << "\033[1;33mCleaning Prefetch Directory: \n\033[0m" << PrefetchPath << endl;
-      file_deletion(PrefetchPath, ver);
-    }
-    else
-    {
-      cout << "Prefetch Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-    if (fs::exists(sys32temp))
-    {
-      cout << "\033[1;33mCleaning Temp Directory: \n\033[0m" << sys32temp << endl;
-      file_deletion(sys32temp, ver);
-    }
-    else
-    {
-      cout << "Temp Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-    if (fs::exists(tempInternetFilesPath))
-    {
-      cout << "\033[1;33mCleaning TempInternet Directory: \n\033[0m" << tempInternetFilesPath << endl;
-      file_deletion(tempInternetFilesPath, ver);
-    }
-    else
-    {
-      cout << "TempInternet Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-    if (fs::exists(inetCachePath))
-    {
-      cout << "\033[1;33mCleaning INetCache Directory: \n\033[0m" << inetCachePath << endl;
-      file_deletion(inetCachePath, ver);
-    }
-    else
-    {
-      cout << "INetCache Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-    if (fs::exists(recentsPath))
-    {
-      cout << "\033[1;33mCleaning Recents Directory: \n\033[0m" << recentsPath << endl;
-      file_deletion(recentsPath, ver);
-    }
-    else
-    {
-      cout << "Recents Directory Not Found. \033[38;5;202m\033[1mError\033[0m" << endl;
-    }
-  }
+void executeFile(const std::string &filePath)
+{
+    ShellExecute(nullptr, "open", filePath.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+}
 
-  return 0;
+bool prompt()
+{
+    char ch;
+    cin >> ch;
+
+    if (ch == 'Y' || ch == 'y')
+    {
+        return true;
+    }
+    else if (ch == 'N' || ch == 'n')
+    {
+        return false;
+    }
+    else
+    {
+        cout << "Invalid Input." << endl;
+        prompt();
+    }
+
+    return false;
+}
+
+int DownloadADB(const string &url, string &DownloadPath, int ver)
+{
+    if (ver == 1)
+    {
+        log("\033[1;33mOpening Download Link In The Browser...\n\033[0m", 2000);
+        openURL(url);
+
+        cout << "\033[1mWaiting For The File To Download...\n";
+        bool filefound = false;
+        for (int i = 0; i < 30; ++i)
+        {
+            if (filesystem::exists(DownloadPath))
+            {
+                filefound = true;
+                break;
+            }
+            this_thread::sleep_for(chrono::seconds(1));
+        }
+
+        if(filefound)
+        {
+            cout<<"ABD Installer Found: "<<DownloadPath<<"\n";
+            cout<<"Executing Installer...\n";
+            executeFile(DownloadPath);
+        }
+        else
+        {
+            cerr << "\033[38;5;202m\033[1mError: The File Was Not Downloaded In Time. Please Try Again Or Install Manually.\n\033[0m";
+        }
+    }
+    else if (ver == 0)
+    {
+        cout << "Operation Closed. \033[38;5;202m\033[1mError Permission Denied.\033[0m" << endl;
+        return 1;
+    }
+
+    return 0;
+}
+
+int CheckInstalled()
+{
+    string basePath = "C:\\adb\\";
+    log("Checking File Path...", 2000);
+    if(filesystem::exists(basePath))
+    {
+        cout<<"\033[32m\033[1mInstallation Complete.\033[0m";
+    }
+    else
+    {
+        cout<<"\033[38;5;202m\033[1mError File Path Not Found. Install ADB Drivers Properly.\033[0m";
+        return 1;
+    }
+
+    return 0;
 }
