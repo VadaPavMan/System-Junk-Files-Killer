@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <windows.h>
+#include <cstdlib>
 #include <chrono>
 #include <thread>
 #include <string>
@@ -56,12 +57,23 @@ void file_deletion(const string &filePath, int ver)
     }
 }
 
-bool CheckASDK()
+bool CheckADB()
 {
-    if (system("abd --version > null 2>&1") == 0)
+    string basePath = "C:\\adb\\";
+    for(auto i = 0; i < 5; i++)
     {
-        return true;
+        if(filesystem::exists(basePath))
+        {
+            return true;  
+        }
+        this_thread::sleep_for(chrono::seconds(1));
     }
+
+    if(!filesystem::exists(basePath))
+    {
+        return false;
+    }
+
     return false;
 }
 
@@ -118,9 +130,10 @@ int DownloadADB(const string &url, string &DownloadPath, int ver)
 
         if(filefound)
         {
-            cout<<"ABD Installer Found: "<<DownloadPath<<"\n";
+            cout<<"ABD Installer Found: \033[1;33m"<<DownloadPath<<"\n\033[0m";
             cout<<"Executing Installer...\n";
             executeFile(DownloadPath);
+            cout<<"\033[1;33mType 'Y' And Hit Enter In Installation Terminal To Procced.\033[0m"<<endl;
         }
         else
         {
@@ -136,13 +149,27 @@ int DownloadADB(const string &url, string &DownloadPath, int ver)
     return 0;
 }
 
-int CheckInstalled()
+int CheckInstalled(int ver = 0)
 {
     string basePath = "C:\\adb\\";
-    log("Checking File Path...", 2000);
-    if(filesystem::exists(basePath))
+    bool folderFound = false;
+    log("\033[1mVerifying File Path...", 2000);
+    for(auto i = 0; i < 60; i++)
+    {
+        if(filesystem::exists(basePath))
+        {
+            folderFound = true;
+            break;
+        }
+        this_thread::sleep_for(chrono::seconds(1));
+    }
+    if(folderFound && ver == 1)
     {
         cout<<"\033[32m\033[1mInstallation Complete.\033[0m";
+    }
+    else if(folderFound && ver == 0)
+    {
+        cout<<"\033[1mFile Path Found: \033[1;33m"<<basePath<<"\033[0m"<<endl;
     }
     else
     {

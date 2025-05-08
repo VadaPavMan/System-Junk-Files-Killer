@@ -141,9 +141,10 @@ int main()
     getch();
 
     cout<<"\033[1m\nChecking For ADB Drivers..."<<endl;
-    if (CheckASDK())
+    if (CheckADB())
     {
-      cout << "ADB Drivers Are Installed And Accessible." << endl;
+      cout << "\033[32m\033[1mADB Drivers Are Installed And Accessible.\033[0m" << endl;
+      CheckInstalled(0);
     }
     else
     {
@@ -152,7 +153,7 @@ int main()
       int ver = prompt();
 
       DownloadADB(url, downloadPath, ver);
-      CheckInstalled();
+      CheckInstalled(ver);
     }
   }
 

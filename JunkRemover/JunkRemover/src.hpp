@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <cstdlib>
 #include <string>
 using namespace std;
 
@@ -12,9 +13,9 @@ void openURL(const std::string& url);
 void executeFile(const std::string& filePath);
 
 int DownloadADB(const string &url, string &DownloadPath, int ver);
-int CheckInstalled();
+int CheckInstalled(int ver);
 
-bool CheckASDK();
+bool CheckADB();
 bool prompt();
 
 #endif
