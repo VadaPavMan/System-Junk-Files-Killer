@@ -50,7 +50,7 @@ The program is designed to minimize user effort by automating the deletion proce
    - Select an option by entering the corresponding number:
      - `1`: Remove system junk files.
      - `2`: Bug log tracking (future implementation).
-     - `3`: Android bug log tracking (future implementation).
+     - `3`: Android bug log tracking.
      - `4`: Exit the program.
 
 ---
