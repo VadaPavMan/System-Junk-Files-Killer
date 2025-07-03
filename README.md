@@ -1,4 +1,4 @@
-### **Project Name**: System Junk Files Remover  
+### System Junk Files Remover  
 
 ---
 
