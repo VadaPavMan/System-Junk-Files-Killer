@@ -5,10 +5,10 @@
 ![png](JunkRemover/image.png)
 
 ## Junks Remover
-![run](JunkRemover/fileremover.gif)
+![file_rmvr](JunkRemover/fileremover.gif)
 
 ## Android Log Tracking Tool
-![andlog](JunkRemover/adblong.gif)
+![andlog](JunkRemover/adblog.gif)
 
 ### **Description**  
 
