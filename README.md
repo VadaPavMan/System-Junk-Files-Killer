@@ -7,6 +7,9 @@
 ## Junks Remover
 ![run](JunkRemover/fileremover.gif)
 
+## Android Log Tracking Tool
+![andlog](JunkRemover/adblong.gif)
+
 ### **Description**  
 
 **For Now: Run It As Administrator In Terminal.**
