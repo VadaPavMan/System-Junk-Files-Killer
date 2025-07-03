@@ -4,7 +4,7 @@
 
 ![png](JunkRemover/image.png)
 
-## Junks Remover
+## Junks Remover Tool
 ![file_rmvr](JunkRemover/fileremover.gif)
 
 ## Android Log Tracking Tool
