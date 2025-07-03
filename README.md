@@ -3,7 +3,9 @@
 ---
 
 ![png](JunkRemover/image.png)
-![run](JunkRemover/run.gif)
+
+## Junks Remover
+![run](JunkRemover/fileremover.gif)
 
 ### **Description**  
 
