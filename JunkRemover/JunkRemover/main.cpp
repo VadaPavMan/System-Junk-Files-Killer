@@ -151,9 +151,39 @@ int main()
       cout << "ADB Drivers Are Not Installed." << endl;
       cout << "Would You Like To Download And Install The ADB Drivers [Y/N]: ";
       int ver = prompt();
+      if(!ver)
+      {
+        cout<<"Error, Permission Denied."<<endl;
+        return 1;
+      }
 
       DownloadADB(url, downloadPath, ver);
       CheckInstalled(ver);
+    }
+
+    cout<<"Approve Popup Window From Your Device. \nChecking For Device Connection..."<<endl;
+    int timeoutSec = 30; 
+    bool devicefound = false;
+
+    for(int i = 0; i < timeoutSec; i++)
+    {
+      if(isDeviceConnected())
+      {
+        devicefound = true;
+        break;
+      }
+      this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    if(devicefound)
+    {
+      cout<<"\033[32m\033[1mDevice Connected.\033[0m"<<endl;
+      cout<<"\033[32m\033[1mRunning Log Script...\033[0m"<<endl;
+      executeLog(devicefound);
+
+    }
+    else
+    {
+      cout<<"\033[38;5;202m\033[1mNo Device Connected. Please Check Your USB Connection And Try Again.\033[0m"<<endl;
     }
   }
 

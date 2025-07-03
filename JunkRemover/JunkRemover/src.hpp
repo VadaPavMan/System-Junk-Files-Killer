@@ -5,6 +5,7 @@
 #include <iostream>
 #include <filesystem>
 #include <cstdlib>
+#include <conio.h>
 #include <string>
 using namespace std;
 
@@ -17,5 +18,7 @@ int CheckInstalled(int ver);
 
 bool CheckADB();
 bool prompt();
+bool isDeviceConnected();
+int executeLog(bool devicecheck);
 
 #endif
